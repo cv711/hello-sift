@@ -25,7 +25,7 @@
       "webhooks": {
         "curl_input": {
           "inbound": {
-            "jsonPath": "{ \"key\" : \"$.server.count\", \"value\": \"$.body.key\" }"
+            "jsonPath": "{ \"key\" : $.server.count, \"value\": $.body.key }"
           }
         }
       }
