@@ -7,10 +7,10 @@
   "icon": "assets/blueprint.svg",
   "interfaces": {
     "email": {
-      "thread" : {
+      "thread": {
         "controller": "dist/js/controller.umd-es2015.js"
       },
-      "client" : {
+      "client": {
         "controller": "dist/js/email-client-controller.umd-es2015.js"
       }
     },
@@ -19,54 +19,54 @@
     }
   },
   "dag": {
-    "inputs":{
+    "inputs": {
       "emails": {},
       "slack-bot": {},
       "webhooks": {
-		  "curl_input": {
-			  "inbound": {
-			     "jsonPath": "{ \"key\" : \"$.server.count\", \"value\": $.body.key }"
-			   }
-		  }
+        "curl_input": {
+          "inbound": {
+            "jsonPath": "{ \"key\" : \"$.server.count\", \"value\": \"$.body.key\" }"
+          }
+        }
       }
     },
-	
-	
-    "nodes":[{
-      "#": "JS Node",
-	"input": {
-		"bucket": "curl_input"
-	},
-      "implementation": {
-        "javascript": "server/node1.js"
+    "nodes": [
+      {
+        "#": "JS Node",
+        "input": {
+          "bucket": "curl_input"
+        },
+        "implementation": {
+          "javascript": "server/node1.js"
+        },
+        "outputs": {
+          "hello": {}
+        }
       },
-      "outputs": {
-        "hello": {}
-      }
-    },
-	{
-		"#": "Python Node",
-		"input": {
-			"bucket": "hello"
-		},
-		"implementation": {
-			"python": "server/node2.python"
-		},
+      {
+        "#": "Python Node",
+        "input": {
+          "bucket": "hello"
+        },
+        "implementation": {
+          "python": "server/node2.python"
+        },
         "outputs": {
           "who": {}
         }
-	}],
-    "stores":{
-        "hello": {
+      }
+    ],
+    "stores": {
+      "hello": {
+        "key$schema": "string"
+      }
+    },
+    "outputs": {
+      "exports": {
+        "who": {
           "key$schema": "string"
         }
-    },
-    "outputs":{
-    	"exports": {
-    		"who": {
-    			"key$schema": "string"
-    		}
-    	}
+      }
     }
   }
 }
