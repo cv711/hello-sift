@@ -25,6 +25,7 @@
       "webhooks": {
         "curl_input": {
           "inbound": {
+            "uri": "path",
             "jsonPath": "{ \"key\" : $.server.count, \"value\": $.body.key }"
           }
         }
